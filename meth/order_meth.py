@@ -1,9 +1,10 @@
 import requests
 from data import BASE_URL
-
+import allure
 
 class OrderMeth:
 
+    @allure.step("Создание заказа")
     def create_order(self, order_data, color):
         payload = {
             "firstName": order_data[0],
@@ -19,6 +20,7 @@ class OrderMeth:
         respons = requests.post(f"{BASE_URL}/api/v1/orders", data=payload)
         return respons.status_code, respons.json()
 
+    @allure.step("Порлучение заказа")
     def get_order(self, curied_id=None, nearestStation=None, limit=None, page=None):
         payload = {
             "courierId": curied_id,
